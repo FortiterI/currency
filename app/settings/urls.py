@@ -19,5 +19,5 @@ from currency import views as currency_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello-world/', currency_views.hello_world),
+    path('contactus/show_all_rec/', currency_views.show_all_contactus_records),
 ]
