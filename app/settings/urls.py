@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('contact_us/', currency_views.index),
     path('contact_us/contacts_list/', currency_views.show_all_contactus_records),
+    path('rates/', currency_views.rate),
 ]

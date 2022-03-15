@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from currency.models import ContactUs
+from currency.models import ContactUs, Rate
 
 
 def show_all_contactus_records(request):
@@ -9,3 +9,8 @@ def show_all_contactus_records(request):
 
 def index(request):
     return render(request, 'index.html')
+
+
+def rate(request):
+    rates = Rate.objects.all()
+    return render(request, "rates.html", context={"rates": rates})
