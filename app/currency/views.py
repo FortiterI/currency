@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 from currency.models import ContactUs
 
 
 def show_all_contactus_records(request):
-    contacts = []
-    for contact in ContactUs.objects.all():
-        contacts.append((contact.id, contact.email_from, contact.subject, contact.message))
-    return HttpResponse(str(contacts))
+    contacts = ContactUs.objects.all()
+    return render(request, 'contact_us_list.html', context={"contacts": contacts})
+
+
+def index(request):
+    return render(request, 'index.html')
