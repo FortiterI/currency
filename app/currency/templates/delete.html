@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{model_name}} Delete{% endblock %}
+
+{% block content %}
+    <p>
+        Do you want to delete "{{model_name}}" with id {{cont.id}}
+    </p>
+    <form method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit"> Delete</button>
+    </form>
+
+{% endblock content %}
