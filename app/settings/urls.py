@@ -19,7 +19,14 @@ from currency import views as currency_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('contact_us/', currency_views.index),
+    path('', currency_views.index),
     path('contact_us/contacts_list/', currency_views.show_all_contactus_records),
-    path('rates/', currency_views.rate),
+    path('rate/list/', currency_views.rate_list),
+    path('rate/create/', currency_views.rate_create),
+    path('rate/update/<int:pk>/', currency_views.rate_update),
+    path('rate/delete/<int:pk>/', currency_views.rate_delete),
+    path('source/list/', currency_views.source_list),
+    path('source/create/', currency_views.source_create),
+    path('source/update/<int:pk>/', currency_views.source_update),
+    path('source/delete/<int:pk>/', currency_views.source_delete)
 ]
