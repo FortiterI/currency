@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Detail  {% endblock %}
+
+{% block content %}
+
+<div>
+    <p>
+        id = {{object.id}} <br>
+        Name  - {{object.currency_type}} <br>
+        Buy = {{object.buy}} <br>
+        Sale = {{object.sale}} <br>
+        Created: date {{object.created}} <br>
+        Source: {{object.source}} <br>
+    </p>
+</div>
+
+{% endblock content %}
