@@ -1,14 +1,43 @@
-from django.http import HttpResponseRedirect
+from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.shortcuts import render, get_object_or_404, redirect
 from currency.models import ContactUs, Rate, Source
 from currency.forms import RateForm, SourceForm
+from django.conf import settings
 
 
-def show_all_contactus_records(request):
-    contacts = ContactUs.objects.all()
-    return render(request, 'contact_us_list.html', context={"contacts": contacts})
+class ContactUsCreateView(CreateView):
+    model = ContactUs
+    template_name = "Contactus_create.html"
+    success_url = reverse_lazy("index")
+    fields = (
+        "name",
+        "reply_to",
+        "subject",
+        "body",
+    )
+
+    def _send_email(self,):
+        recipient = settings.EMAIL_HOST_USER
+        subject = "User ContactUs"
+        body = f"""
+            Request From: {self.object.name}
+            Email to reply: {self.object.reply_to}
+            Subject: {self.object.subject}
+            Body: {self.object.body}
+        """
+        send_mail(
+            subject,
+            body,
+            settings.EMAIL_HOST_USER,
+            [recipient],
+        )
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self._send_email()
+        return response
 
 
 class RateList(ListView):

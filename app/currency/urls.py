@@ -4,7 +4,7 @@ from currency import views as currency_views
 app_name = 'currency'
 
 urlpatterns = [
-    path('contact_us/contacts_list/', currency_views.show_all_contactus_records, name="contactus_list"),
+    path('contact-us/create/', currency_views.ContactUsCreateView.as_view(), name="contactus_create"),
 
     path('rate/list/', currency_views.RateList.as_view(), name="rate_list"),
     path('rate/create/', currency_views.RateCreate.as_view(), name="rate_create"),
