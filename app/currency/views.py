@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -18,7 +19,7 @@ class ContactUsCreateView(CreateView):
         "body",
     )
 
-    def _send_email(self,):
+    def _send_email(self, ):
         recipient = settings.EMAIL_HOST_USER
         subject = "User ContactUs"
         body = f"""
@@ -45,11 +46,14 @@ class RateList(ListView):
     template_name = "rate.html"
 
 
-class RateCreate(CreateView):
+class RateCreate(UserPassesTestMixin, CreateView):
     model = Rate
     template_name = "create.html"
     form_class = RateForm
     success_url = reverse_lazy("currency:rate_list")
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class RateDetail(DetailView):
@@ -57,17 +61,23 @@ class RateDetail(DetailView):
     template_name = "rate_detail.html"
 
 
-class RateUpdate(UpdateView):
+class RateUpdate(UserPassesTestMixin, UpdateView):
     model = Rate
     template_name = "update.html"
     form_class = RateForm
     success_url = reverse_lazy("currency:rate_list")
 
+    def test_func(self):
+        return self.request.user.is_superuser
 
-class RateDelete(DeleteView):
+
+class RateDelete(UserPassesTestMixin, DeleteView):
     model = Rate
     template_name = "delete.html"
     success_url = reverse_lazy("currency:rate_list")
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
 
 class SourceList(ListView):

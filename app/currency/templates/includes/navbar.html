@@ -3,4 +3,14 @@
     <a href="{% url 'currency:contactus_create' %}"> Contact_US </a>
     <a href="{% url 'currency:rate_list' %}">Rates</a>
     <a href="{% url 'currency:source_list' %}"> Sources </a>
+
+    {% if request.user.is_authenticated %}
+        Name: {{ request.user.first_name }} {{request.user.last_name}}
+        Id: {{request.user.id}}
+        <a href="{% url 'accounts:my-profile' %}"> My Profile </a>
+        <a href="{% url 'logout' %}"> Logout </a>
+    {% else %}
+        <a href=""> Sign Up </a>
+        <a href="{% url 'login' %}"> Login </a>
+    {% endif %}
 </nav>
