@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from django.urls import reverse_lazy
 
@@ -134,15 +133,15 @@ INTERNAL_IPS = [
     "127.0.0.1",
 
 ]
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "test.dgango.py@gmail.com"
-EMAIL_HOST_PASSWORD = "test123python321test"
-DEFAULT_FROM_EMAIL = 'test.dgango.py@gmail.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = ""
+# EMAIL_HOST_PASSWORD = ""
+# DEFAULT_FROM_EMAIL = ""
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 AUTH_USER_MODEL = 'accounts.User'

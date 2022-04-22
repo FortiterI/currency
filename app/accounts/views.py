@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, CreateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib import messages
 from accounts.forms import SignUpForm
 from accounts.models import User
 
@@ -33,7 +33,9 @@ class ActivateUser(RedirectView):
         user = User.objects.get(username=username)
 
         if user.is_active:
-            print('already activate')
-        user.is_active = True
-        user.save()
+            messages.error(self.request, 'Account is already activated!')
+        else:
+            user.is_active = True
+            user.save()
+            messages.success(self.request, 'Account is activated!')
         return super().get_redirect_url()
