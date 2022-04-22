@@ -1,5 +1,5 @@
 from django.urls import reverse_lazy
-from django.views.generic import UpdateView, CreateView
+from django.views.generic import UpdateView, CreateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import SignUpForm
@@ -24,3 +24,16 @@ class SignUp(CreateView):
     template_name = "signup.html"
     success_url = reverse_lazy("index")
     form_class = SignUpForm
+
+
+class ActivateUser(RedirectView):
+    url = reverse_lazy('account:login')
+
+    def get_redirect_url(self, username):
+        user = User.objects.get(username=username)
+
+        if user.is_active:
+            print('already activate')
+        user.is_active = True
+        user.save()
+        return super().get_redirect_url()

@@ -110,10 +110,4 @@ class SourceDelete(DeleteView):
     success_url = reverse_lazy("currency:source_list")
 
 
-def source_delete(request, pk):
-    instance = get_object_or_404(Source, pk=pk)
-    if request.method == "POST":
-        instance.delete()
-        return redirect('currency:source_list')
-    else:
-        return render(request, "delete.html", context={"cont": instance, "model_name": "Source"})
+
