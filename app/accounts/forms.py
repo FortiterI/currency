@@ -25,7 +25,7 @@ class SignUpForm(forms.ModelForm):
         cleaned_data = self.cleaned_data
 
         user = super(SignUpForm, self).save(commit=False)
-        user.set_password(cleaned_data['password'])
+        user.set_password(cleaned_data['password1'])
         user.is_active = False
 
         if commit:
@@ -39,7 +39,7 @@ class SignUpForm(forms.ModelForm):
         subject = "Sing Up"
         body = f"""
                     Activation Link:
-                    http://127.0.0.1:8000/{reverse('accounts:activate-user', args= [user.username])}
+                    http://127.0.0.1:8000{reverse('accounts:activate-user', args= [user.username])}
                 """
         send_mail(
             subject,

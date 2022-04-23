@@ -27,7 +27,7 @@ class SignUp(CreateView):
 
 
 class ActivateUser(RedirectView):
-    url = reverse_lazy('account:login')
+    url = reverse_lazy('login')
 
     def get_redirect_url(self, username):
         user = User.objects.get(username=username)
