@@ -2,7 +2,6 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
-from django.shortcuts import render, get_object_or_404, redirect
 from currency.models import ContactUs, Rate, Source
 from currency.forms import RateForm, SourceForm
 from django.conf import settings
@@ -108,12 +107,3 @@ class SourceDelete(DeleteView):
     model = Source
     template_name = "delete.html"
     success_url = reverse_lazy("currency:source_list")
-
-
-def source_delete(request, pk):
-    instance = get_object_or_404(Source, pk=pk)
-    if request.method == "POST":
-        instance.delete()
-        return redirect('currency:source_list')
-    else:
-        return render(request, "delete.html", context={"cont": instance, "model_name": "Source"})
