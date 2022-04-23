@@ -2,7 +2,7 @@ from django import forms
 from django.conf import settings
 from django.core.mail import send_mail
 from django.urls import reverse
-
+from settings import settings as st
 from accounts.models import User
 
 
@@ -39,7 +39,7 @@ class SignUpForm(forms.ModelForm):
         subject = "Sing Up"
         body = f"""
                     Activation Link:
-                    http://127.0.0.1:8000{reverse('accounts:activate-user', args= [user.username])}
+                    {st.HTTP_SCHEMA}://{st.DOMAIN}{reverse('accounts:activate-user', args= [user.username])}
                 """
         send_mail(
             subject,

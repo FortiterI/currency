@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import UpdateView, CreateView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,12 +31,12 @@ class ActivateUser(RedirectView):
     url = reverse_lazy('login')
 
     def get_redirect_url(self, username):
-        user = User.objects.get(username=username)
+        user = get_object_or_404(User, username=username)
 
         if user.is_active:
             messages.error(self.request, 'Account is already activated!')
         else:
             user.is_active = True
-            user.save()
+            user.save(update_fields=['is_active'])
             messages.success(self.request, 'Account is activated!')
         return super().get_redirect_url()
