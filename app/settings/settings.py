@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'currency',
     'accounts',
+    'crispy_forms',
 
     'django_extensions',
 ]
@@ -125,7 +126,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-
+CRISPY_TEMPLATE_PACK = 'uni_form'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 INTERNAL_IPS = [

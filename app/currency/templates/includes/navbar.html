@@ -1,16 +1,46 @@
-<nav>
-    <a href="{% url 'index' %}"> Home   </a>
-    <a href="{% url 'currency:contactus_create' %}"> Contact_US </a>
-    <a href="{% url 'currency:rate_list' %}">Rates</a>
-    <a href="{% url 'currency:source_list' %}"> Sources </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Currency</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'currency:rate_list' %}">Rates</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{% url 'currency:source_list' %}">Sources</a>
+            </li>
+            <li class="nav-item disabled">
+                <a class="nav-link " href="{% url 'currency:contactus_create' %}">Contact_US</a>
+            </li>
+            <li class="nav-item dropdown">
+                {% if request.user.is_authenticated %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Name: {{ request.user.first_name }} {{request.user.last_name}}
+                    Id: {{request.user.id}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'accounts:my-profile' %}">My Profile</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                </div>
+                {% else %}
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Account
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                    <a class="dropdown-item" href="{% url 'accounts:sign-up' %}">Sign Up</a>
+                </div>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 
-    {% if request.user.is_authenticated %}
-        Name: {{ request.user.first_name }} {{request.user.last_name}}
-        Id: {{request.user.id}}
-        <a href="{% url 'accounts:my-profile' %}"> My Profile </a>
-        <a href="{% url 'logout' %}"> Logout </a>
-    {% else %}
-        <a href="{% url 'accounts:sign-up' %}"> Sign Up </a>
-        <a href="{% url 'login' %}"> Login </a>
-    {% endif %}
 </nav>

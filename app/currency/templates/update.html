@@ -3,10 +3,10 @@
 {% block title %} Update  {% endblock %}
 
 {% block content %}
-
+    {% load crispy_forms_tags %}
     <form method="post">
         {% csrf_token %}
-        {{form.as_p}}
+        {{form|crispy}}
         <button type="submit"> Update {{model_name}} </button>
     </form>
 

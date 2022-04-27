@@ -3,12 +3,13 @@
 {% block title %}Contact Us{% endblock title %}
 
 {% block content %}
-    Contact Us
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit"> Submit </button>
-        </form>
+Contact Us
+{% load crispy_forms_tags %}
+<form method="post" class="uniForm">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit"> Submit</button>
+</form>
 
 {% endblock content %}
 
