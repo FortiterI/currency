@@ -1,5 +1,11 @@
 from django.db import models
+from django.templatetags.static import static
+
 import currency.model_choises as mch
+
+
+def upload_logo(instance, filename: str) -> str:
+    return f'source id:{instance.id}/logos/{filename}'
 
 
 class ContactUs(models.Model):
@@ -14,13 +20,21 @@ class ContactUs(models.Model):
 class Source(models.Model):
     name = models.CharField(max_length=32)
     url = models.URLField(max_length=200)
+    logo = models.FileField(upload_to=upload_logo, default=None, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
+    def logo_url(self):
+
+        if self.logo:
+            return self.logo.url
+
+        return static('img/logo_bank.png')
+
 
 class Rate(models.Model):
-    currency_type = models.CharField(max_length=6, choices=mch.RateType.choices)
+    currency_type = models.CharField(max_length=8, choices=mch.RateType.choices)
     buy = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.DecimalField(max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)

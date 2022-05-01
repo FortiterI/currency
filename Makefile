@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-manage_py = python app/mange.py
+manage_py = python app/manage.py
 
 migrate:
 	$(manage_py) migrate

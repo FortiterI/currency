@@ -1,3 +1,5 @@
+{% load static %}
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Currency</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -19,12 +21,21 @@
                 <a class="nav-link " href="{% url 'currency:contactus_create' %}">Contact_US</a>
             </li>
             <li class="nav-item dropdown">
+
                 {% if request.user.is_authenticated %}
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
+
+                    {% if request.user.avatar %}
+                        <img src="{{request.user.avatar.url}}" width="30" height="30" class="rounded-circle">
+                    {% else %}
+                        <img src="{% static 'img/anon_avatar.jpg'%}" width="30" height="30" class="rounded-circle">
+                    {% endif %}
                     Name: {{ request.user.first_name }} {{request.user.last_name}}
                     Id: {{request.user.id}}
+
                 </a>
+
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'accounts:my-profile' %}">My Profile</a>
                     <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

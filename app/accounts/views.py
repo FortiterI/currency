@@ -13,7 +13,8 @@ class MyProfile(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('index')
     fields = (
         'first_name',
-        'last_name'
+        'last_name',
+        'avatar'
     )
 
     def get_object(self, queryset=None):

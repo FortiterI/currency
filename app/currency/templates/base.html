@@ -14,8 +14,15 @@
 <div class="container-fluid">
     {% include 'includes/navbar.html' %}
     {% include 'includes/message.html' %}
-    {% block content %}
-    {% endblock content %}
+    <div class="row">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <div class="fixed-bottom">
+       {% include 'includes/footer.html' %}
+    </div>
+
 </div>
 
 
