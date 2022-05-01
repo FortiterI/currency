@@ -2,7 +2,7 @@ django
 django-extensions==3.1.5
 django-debug-toolbar
 django-crispy-forms
-
+celery
 
 
 ipython
