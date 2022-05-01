@@ -4,7 +4,8 @@
 
 {% block content %}
     <div>My profile</div>
-    <form method="post">
+    <form method="post" class="uniForm" enctype="multipart/form-data">
+        <img src="{{request.user.avatar_url}}" width="250" height="200" class="rounded">
         {% csrf_token %}
         {{form.as_p}}
         <button type="submit"> Update Profile {{model_name}} </button>

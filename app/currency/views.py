@@ -9,7 +9,7 @@ from django.conf import settings
 
 class ContactUsCreateView(CreateView):
     model = ContactUs
-    template_name = "Contactus_create.html"
+    template_name = "contactus_create.html"
     success_url = reverse_lazy("index")
     fields = (
         "name",
@@ -98,7 +98,7 @@ class SourceCreate(CreateView):
 
 class SourceUpdate(UpdateView):
     model = Source
-    template_name = "update.html"
+    template_name = "source_update.html"
     form_class = SourceForm
     success_url = reverse_lazy("currency:source_list")
 

@@ -4,7 +4,7 @@
 
 {% block content %}
     <p>
-        Do you want to delete "{{model_name}}" with id {{object.id}}
+        Do you want to delete object with id {{object.id}}
     </p>
     <form method="post">
         {% csrf_token %}

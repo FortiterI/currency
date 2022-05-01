@@ -5,8 +5,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <form method="post" enctype="multipart/form-data">
-        <img src="{{request.object.logo.url}}" width="250" height="200">
-        request:{{request.object.id}}
+        <img src="{{object.logo_url}}" width="250" height="200">
         {% csrf_token %}
         {{form|crispy}}
         <button type="submit"> Update {{model_name}} </button>

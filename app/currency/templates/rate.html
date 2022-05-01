@@ -2,28 +2,42 @@
 {% block title %}Rates{% endblock %}
 {% block content %}
 
-<table>
+<table class="table table-striped">
+    <thead>
     <tr>
-        <th> Currency name </th>
-        <th> Buy </th>
-        <th> Sale </th>
-        <th> Created date </th>
-        <th> Source </th>
-        <td> <a href="{% url 'currency:rate_create' %}"> Create new </a></td>
+        <th> Currency name</th>
+        <th> Buy</th>
+        <th> Sale</th>
+        <th> Created date</th>
+        <th> Source</th>
+        <td><a href="{% url 'currency:rate_create' %}"> Create new </a></td>
 
     </tr>
-     {% for rate in rate_list %}
-     <tr>
+    </thead>
+    <tbody>
+    {% for rate in rate_list %}
+    <tr>
         <td>{{rate.currency_type}}</td>
         <td>{{rate.buy}}</td>
         <td>{{rate.sale}}</td>
         <td>{{rate.created}}</td>
-         <td>{{rate.source.name}}</td>
-         <td><a href="{% url 'currency:rate_detail' rate.id %}"> Detail</a> </td>
-         <td><a href="{% url 'currency:rate_update' rate.id %}"> Edit</a> </td>
-         <td><a href="{% url 'currency:rate_delete' rate.id %}"> Delete</a> </td>
-    {% endfor %}
+        <td>{{rate.source.name}}</td>
+        <td>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Action
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{% url 'currency:rate_detail' rate.id %}">Detail</a>
+                    <a class="dropdown-item" href="{% url 'currency:rate_update' rate.id %}">Edit</a>
+                    <a class="dropdown-item" href="{% url 'currency:rate_delete' rate.id %}">Delete</a>
+                </div>
+            </div>
+        </td>
     </tr>
+    {% endfor %}
+    </tbody>
 
 </table>
 
