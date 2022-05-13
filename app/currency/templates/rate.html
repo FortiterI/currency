@@ -6,6 +6,7 @@
     <thead>
     <tr>
         <th> Currency name</th>
+        <th> Base Currency Type</th>
         <th> Buy</th>
         <th> Sale</th>
         <th> Created date</th>
@@ -17,7 +18,8 @@
     <tbody>
     {% for rate in rate_list %}
     <tr>
-        <td>{{rate.currency_type}}</td>
+        <td>{{rate.get_currency_type_display}}</td>
+        <td>{{rate.get_base_type_display}}</td>
         <td>{{rate.buy}}</td>
         <td>{{rate.sale}}</td>
         <td>{{rate.created}}</td>

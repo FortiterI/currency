@@ -1,10 +1,12 @@
 django
+celery
+requests
+beautifulsoup4
+
+#dev
 django-extensions==3.1.5
 django-debug-toolbar
 django-crispy-forms
-celery
-
-
 ipython
 
 #flake8
