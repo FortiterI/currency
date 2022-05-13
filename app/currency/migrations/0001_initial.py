@@ -39,8 +39,8 @@ class Migration(migrations.Migration):
             name='Rate',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('currency_type', models.CharField(choices=[('UAH', 'Hrivna'), ('USD', 'Dollar'), ('EUR', 'Euro'), ('BTC', 'Bitcoin')], max_length=8)),
-                ('base_type', models.CharField(choices=[('UAH', 'Hrivna'), ('USD', 'Dollar'), ('EUR', 'Euro'), ('BTC', 'Bitcoin')], default='UAH', max_length=8)),
+                ('currency_type', models.CharField(choices=[('UAH', 'Hrivna'), ('USD', 'Dollar'), ('EUR', 'Euro'), ('BTC', 'Bitcoin')], max_length=8)),  # noqa E501
+                ('base_type', models.CharField(choices=[('UAH', 'Hrivna'), ('USD', 'Dollar'), ('EUR', 'Euro'), ('BTC', 'Bitcoin')], default='UAH', max_length=8)),  # noqa E501
                 ('buy', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('sale', models.DecimalField(decimal_places=2, max_digits=10)),
                 ('created', models.DateTimeField(auto_now_add=True)),

@@ -1,7 +1,6 @@
 import requests
 from decimal import Decimal
 from celery import shared_task
-from bs4 import BeautifulSoup
 import currency.model_choises as mch
 
 
@@ -34,10 +33,6 @@ def pars_privatbank():
         currency_type = rate['ccy']
         buy = round_decimal(rate['buy'])
         sale = round_decimal(rate['sale'])
-        # try:
-        #     source = Source.objects.get(code_name=mch.SourceCodeName.PRIVATBANK)
-        # except Source.DoesNotExist:
-        #     source = Source.objects.create(code_name=mch.SourceCodeName.PRIVATBANK)
 
         last_rate = Rate.objects.filter(source=source, currency_type=currency_type).order_by('-created').first()
 
@@ -124,4 +119,3 @@ def pars_vkurse():
                 sale=sale,
                 source=source,
             )
-

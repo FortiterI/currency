@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='source',
             name='code_name',
-            field=models.PositiveIntegerField(choices=[(1, 'PrivatBank'), (2, 'MonoBank'), (3, 'vkurse.')], unique=True),
+            field=models.PositiveIntegerField(choices=[(1, 'PrivatBank'), (2, 'MonoBank'), (3, 'vkurse.')], unique=True),  # noqa E501
         ),
     ]

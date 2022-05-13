@@ -19,7 +19,7 @@ class ContactUs(models.Model):
 
 class Source(models.Model):
     name = models.CharField(max_length=32)
-    code_name = models.PositiveIntegerField(choices=mch.SourceCodeName.choices, unique=True )
+    code_name = models.PositiveIntegerField(choices=mch.SourceCodeName.choices, unique=True)
     url = models.URLField(max_length=200)
     logo = models.FileField(upload_to=upload_logo, default=None, null=True, blank=True)
 
