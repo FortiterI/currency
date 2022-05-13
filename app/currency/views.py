@@ -2,6 +2,9 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django_filters.views import FilterView
+from django.http.request import QueryDict
+from currency.filters import RateFilter
 from currency.models import ContactUs, Rate, Source
 from currency.forms import RateForm, SourceForm
 from django.conf import settings
@@ -40,9 +43,22 @@ class ContactUsCreateView(CreateView):
         return response
 
 
-class RateList(ListView):
+class RateList(FilterView):
     queryset = Rate.objects.all().order_by('-id').select_related('source')
     template_name = "rate.html"
+    paginate_by = 5
+    filterset_class = RateFilter
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        query_params = QueryDict(mutable=True)
+
+        for key, value in self.request.GET.items():
+            if key != 'page':
+                query_params[key] = value
+
+        context['filter_params'] = query_params.urlencode()
+        return context
 
 
 class RateCreate(UserPassesTestMixin, CreateView):

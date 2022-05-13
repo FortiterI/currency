@@ -2,6 +2,7 @@ django
 celery
 requests
 beautifulsoup4
+django-filter
 
 #dev
 django-extensions==3.1.5

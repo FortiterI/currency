@@ -12,9 +12,11 @@ class MyProfile(LoginRequiredMixin, UpdateView):
     template_name = 'my_profile.html'
     success_url = reverse_lazy('index')
     fields = (
+        'avatar',
         'first_name',
         'last_name',
-        'avatar'
+        'phone',
+        'email',
     )
 
     def get_object(self, queryset=None):

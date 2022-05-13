@@ -14,6 +14,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     email = models.EmailField('email address', unique=True)
+    phone = models.CharField(max_length=20, default=None, null=True)
     avatar = models.FileField(upload_to=upload_avatar, default=None, null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -22,7 +23,7 @@ class User(AbstractUser):
 
         super().save(*args, **kwargs)
 
-    def logo_url(self):
+    def avatar_url(self):
 
         if self.avatar:
             return self.avatar.url
