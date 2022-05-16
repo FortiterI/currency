@@ -1,8 +1,11 @@
-django
-celery
-requests
+django~=4.0.2
+celery~=5.2.6
+requests~=2.27.1
 beautifulsoup4
-django-filter
+django-filter~=21.1
+djangorestframework~=3.13.1
+djangorestframework-xml-2.0.0
+drf-yasg
 
 #dev
 django-extensions==3.1.5

@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_filters',
-
+    'rest_framework',
     'currency',
     'accounts',
     'crispy_forms',
+    'drf_yasg',
 
     'django_extensions',
 ]
