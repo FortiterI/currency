@@ -7,7 +7,7 @@ from django.http.request import QueryDict
 from currency.filters import RateFilter
 from currency.models import ContactUs, Rate, Source
 from currency.forms import RateForm, SourceForm
-from django.conf import settings
+from currency.tasks import send_email
 
 
 class ContactUsCreateView(CreateView):
@@ -21,25 +21,9 @@ class ContactUsCreateView(CreateView):
         "body",
     )
 
-    def _send_email(self, ):
-        recipient = settings.EMAIL_HOST_USER
-        subject = "User ContactUs"
-        body = f"""
-            Request From: {self.object.name}
-            Email to reply: {self.object.reply_to}
-            Subject: {self.object.subject}
-            Body: {self.object.body}
-        """
-        send_mail(
-            subject,
-            body,
-            settings.EMAIL_HOST_USER,
-            [recipient],
-        )
-
     def form_valid(self, form):
         response = super().form_valid(form)
-        self._send_email()
+        send_email.delay(self.object.name, self.object.reply_to, self.object.subject, self.object.body)
         return response
 
 

@@ -2,6 +2,8 @@ import requests
 from decimal import Decimal
 from celery import shared_task
 import currency.model_choises as mch
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 def round_decimal(value: str) -> Decimal:
@@ -36,7 +38,7 @@ def pars_privatbank():
 
         last_rate = Rate.objects.filter(source=source, currency_type=currency_type).order_by('-created').first()
 
-        if (last_rate is None   # if rates does not exist in tables
+        if (last_rate is None  # if rates does not exist in tables
                 or last_rate.sale != sale or last_rate.buy != buy):
             Rate.objects.create(
                 currency_type=currency_type,
@@ -71,7 +73,7 @@ def pars_monobank():
         buy = round_decimal(rate['rateBuy'])
         sale = round_decimal(rate['rateSell'])
 
-        last_rate = Rate.objects.filter(source=source, currency_type=currency_type, base_type=base_currency_type).\
+        last_rate = Rate.objects.filter(source=source, currency_type=currency_type, base_type=base_currency_type). \
             order_by('-created').first()
 
         if (last_rate is None  # if rates does not exist in tables
@@ -110,7 +112,7 @@ def pars_vkurse():
 
         last_rate = Rate.objects.filter(source=source, currency_type=currency_type).order_by('-created').first()
 
-        if (last_rate is None   # if rates does not exist in tables
+        if (last_rate is None  # if rates does not exist in tables
                 or last_rate.sale != sale or last_rate.buy != buy):
             Rate.objects.create(
                 currency_type=currency_type,
@@ -119,3 +121,20 @@ def pars_vkurse():
                 sale=sale,
                 source=source,
             )
+
+
+@shared_task()
+def send_email(name: str, reply_to: str, subject: str, body: str):
+    recipient = settings.EMAIL_HOST_USER
+    body = f"""
+            Request From: {name}
+            Email to reply: {reply_to}
+            Subject: {subject}
+            Body: {body}
+        """
+    send_mail(
+        subject,
+        body,
+        settings.EMAIL_HOST_USER,
+        [recipient],
+    )
