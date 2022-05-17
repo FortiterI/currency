@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from celery.schedules import crontab
 from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django_filters',
+    'rest_framework',
     'currency',
     'accounts',
     'crispy_forms',
+    'drf_yasg',
 
     'django_extensions',
 ]
@@ -137,8 +140,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 
 ]
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # noqa:E800
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
@@ -154,3 +157,19 @@ HTTP_SCHEMA = 'http'
 
 MEDIA_ROOT = BASE_DIR/'..'/'static_content'/'media'
 MEDIA_URL = '/media/'
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_BEAT_SCHEDULE = {
+    'pars_monobank': {
+        'task': 'currency.tasks.pars_monobank',
+        'schedule': crontab(minute="*/1"),
+    },
+    'pars_privatbank': {
+        'task': 'currency.tasks.pars_privatbank',
+        'schedule': crontab(minute="*/1"),
+    },
+    'pars_vkurse': {
+        'task': 'currency.tasks.pars_vkurse',
+        'schedule': crontab(minute="*/1"),
+    },
+}

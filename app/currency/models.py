@@ -19,6 +19,7 @@ class ContactUs(models.Model):
 
 class Source(models.Model):
     name = models.CharField(max_length=32)
+    code_name = models.PositiveIntegerField(choices=mch.SourceCodeName.choices, unique=True)
     url = models.URLField(max_length=200)
     logo = models.FileField(upload_to=upload_logo, default=None, null=True, blank=True)
 
@@ -35,6 +36,7 @@ class Source(models.Model):
 
 class Rate(models.Model):
     currency_type = models.CharField(max_length=8, choices=mch.RateType.choices)
+    base_type = models.CharField(max_length=8, choices=mch.RateType.choices, default=mch.RateType.UAH)
     buy = models.DecimalField(max_digits=10, decimal_places=2)
     sale = models.DecimalField(max_digits=10, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
