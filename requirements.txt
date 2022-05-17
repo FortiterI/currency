@@ -4,7 +4,7 @@ requests~=2.27.1
 beautifulsoup4
 django-filter~=21.1
 djangorestframework~=3.13.1
-djangorestframework-xml-2.0.0
+djangorestframework-xml
 drf-yasg
 
 #dev
