@@ -44,5 +44,3 @@ class SourceSerializer(serializers.ModelSerializer):
             'name',
             'url',
         )
-
-

@@ -21,4 +21,3 @@ class SourceView(generics.ListAPIView):
     queryset = Source.objects.all()
     serializer_class = SourceSerializer
     renderer_classes = (JSONRenderer, XMLRenderer)
-
