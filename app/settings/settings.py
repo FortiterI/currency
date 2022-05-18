@@ -184,10 +184,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.IsAdminUser',
     ),
-    # 'DEFAULT_PAGINATION_CLASS': '',
+    # 'DEFAULT_PAGINATION_CLASS': '',  # noqa: E800
     'DEFAULT_THROTTLE_RATES': {
         'currency': '20/min',
-        # 'user': '1000/day',
     },
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }

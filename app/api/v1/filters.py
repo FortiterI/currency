@@ -1,6 +1,4 @@
 import django_filters
-from django.forms import DateInput
-
 from currency.models import Rate, ContactUs
 
 
@@ -20,4 +18,4 @@ class ContactUsFilter(django_filters.FilterSet):
         fields = {'name': ('exact',),
                   'reply_to': ('exact',),
                   'subject': ('exact',)
-        }
+                  }
