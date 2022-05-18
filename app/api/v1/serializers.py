@@ -8,6 +8,7 @@ class RateSerializer(serializers.ModelSerializer):
         model = Rate
         fields = (
             'id',
+            'currency_type',
             'sale',
             'buy',
             'source',
