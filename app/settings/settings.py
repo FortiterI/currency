@@ -142,8 +142,8 @@ INTERNAL_IPS = [
     "127.0.0.1",
 
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # noqa:E800
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # noqa:E800
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # noqa:E800
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587

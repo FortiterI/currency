@@ -13,7 +13,7 @@ from rest_framework import filters as rest_framework_filters
 
 
 class RateViewSet(viewsets.ModelViewSet):
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().order_by('-id')
     serializer_class = RateSerializer
     renderer_classes = (JSONRenderer, XMLRenderer)
     pagination_class = RatePagination
@@ -22,7 +22,7 @@ class RateViewSet(viewsets.ModelViewSet):
         DjangoFilterBackend,
         rest_framework_filters.OrderingFilter
     )
-    ordering_fields = ('id', 'sale', 'buy', )
+    ordering_fields = ('-id', 'sale', 'buy', )
     throttle_classes = [AnonCurrencyThrottle]
 
 
