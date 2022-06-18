@@ -37,7 +37,7 @@ def test_contact_us_valid_form(client, mailoutbox):
     response = client.post('/currency/contact-us/create/', data=data)
     assert response.status_code == 302
     assert response.url == '/'
-    assert len(mailoutbox) == 0
+    assert len(mailoutbox) == 0  # TODO
     assert ContactUs.objects.count() == initial_count + 1
 
 
